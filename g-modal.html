@@ -1,8 +1,8 @@
-<polymer-element name="g-modal" attributes="dismiss">
+<polymer-element name="g-modal" attributes="startAs dismiss">
 	<template>
 		<link rel="stylesheet" href="g-modal.css">
-		<div id="backdrop" class="hide"></div>
-		<div id="modal" class="hide">
+		<div id="backdrop" class="{{ startAs == 'opened' ? '' : 'hide' }}"></div>
+		<div id="modal" class="{{ startAs == 'opened' ? '' : 'hide' }}">
 			<div id="dialog" class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -26,9 +26,6 @@
 
 	<script>
     	Polymer({
-			ready: function() {
-			},
-			
 			open: function() {
 				$(this.$.backdrop).removeClass();
 				$(this.$.modal).removeClass();
