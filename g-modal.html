@@ -1,10 +1,43 @@
-<polymer-element name="g-modal" attributes="">
+<polymer-element name="g-modal" attributes="dismiss">
 	<template>
 		<link rel="stylesheet" href="g-modal.css">
-		MODAL
+		<div id="backdrop" class="hide"></div>
+		<div id="modal" class="hide">
+			<div id="dialog" class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<template if="{{ dismiss }}">
+	                        <button on-click="{{ close }}" type="button" class="close" aria-hidden="true">&times;</button>
+						</template>
+                        <div class="modal-title">
+                            <content select="[header]"></content>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+						<content select="[body]"></content>
+                    </div> 
+                    <div class="modal-footer">
+						<content select="[footer]"></content>
+					</div>
+				</div><!-- modal-content -->
+			</div><!-- modal-dialog -->
+		</div><!-- modal -->
 	</template>
+
 	<script>
     	Polymer({
+			ready: function() {
+			},
+			
+			open: function() {
+				$(this.$.backdrop).removeClass();
+				$(this.$.modal).removeClass();
+			},
+
+			close: function() {
+				$(this.$.backdrop).addClass('hide');
+				$(this.$.modal).addClass('hide');
+			}
 
     	});
 	</script>
